@@ -8,18 +8,31 @@
 
 var fs = require ('fs');
 
+ // async version
 
- var parsedCountry=JSON.parse(fs.readFileSync('countries.json'));
-//function(err, data) {
-   // if (err) {
-   //    throw err;
-   // }
+ // var parsedCountry=JSON.parse(fs.readFileSync('countries.json'));
+ //
+ //
+ //
+ //
+ //   for(var i = 0; i < parsedCountry.length; i++) {
+ //      if (parsedCountry[i].name === process.argv[2]) {
+ //         console.log(parsedCountry[i]);
+ //
+ //      }
+ //   }
 
-   //var parsedCountry = JSON.parse(data);
+ // sync version
 
-   for(var i = 0; i < parsedCountry.length; i++) {
-      if (parsedCountry[i].name === process.argv[2]) {
-         console.log(parsedCountry[i]);
-
-      }
+ fs.readFile('countries.json', function(error,data){
+    if (error){
+      throw error;
    }
+   var parsedCountry = JSON.parse(data);
+
+   for (var i = 0 ; i < parsedCountry.length; i++){
+     if( parsedCountry[i].name === process.argv[2]){
+        console.log(parsedCountry[i]);
+     }
+   }
+});
